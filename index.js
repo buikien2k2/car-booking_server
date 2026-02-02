@@ -18,7 +18,8 @@ const transporter = nodemailer.createTransport({
     pass: process.env.MAIL_PASS,
   },
 });
-
+console.log("MAIL USER:", process.env.MAIL_USER);
+console.log("MAIL PASS:", process.env.MAIL_PASS);
 /* ======================
    API BOOKING
 ====================== */
