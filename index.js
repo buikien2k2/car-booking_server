@@ -11,32 +11,32 @@ app.use(express.json());
 /* ======================
    MAIL SETUP
 ====================== */
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
-});
-console.log("MAIL USER:", process.env.MAIL_USER);
-console.log("MAIL PASS:", process.env.MAIL_PASS);
+// const transporter = nodemailer.createTransport({
+//   service: "gmail",
+//   auth: {
+//     user: process.env.MAIL_USER,
+//     pass: process.env.MAIL_PASS,
+//   },
+// });
+// console.log("MAIL USER:", process.env.MAIL_USER);
+// console.log("MAIL PASS:", process.env.MAIL_PASS);
 /* ======================
    API BOOKING
 ====================== */
-app.get("/test-mail", async (req, res) => {
-  try {
-    await transporter.sendMail({
-      from: `"Test Mail" <${process.env.MAIL_USER}>`,
-      to: process.env.MAIL_USER,
-      subject: "TEST MAIL OK",
-      text: "Nếu thấy mail này là Gmail OK",
-    });
-    res.send("MAIL OK");
-  } catch (e) {
-    console.error(e);
-    res.status(500).send("MAIL FAIL");
-  }
-});
+// app.get("/test-mail", async (req, res) => {
+//   try {
+//     await transporter.sendMail({
+//       from: `"Test Mail" <${process.env.MAIL_USER}>`,
+//       to: process.env.MAIL_USER,
+//       subject: "TEST MAIL OK",
+//       text: "Nếu thấy mail này là Gmail OK",
+//     });
+//     res.send("MAIL OK");
+//   } catch (e) {
+//     console.error(e);
+//     res.status(500).send("MAIL FAIL");
+//   }
+// });
 
 app.post("/booking", async (req, res) => {
   try {
@@ -76,23 +76,23 @@ app.post("/booking", async (req, res) => {
     });
 
     /* ===== MAIL KHÁCH ===== */
-    await transporter.sendMail({
-      from: `"Nhà xe ABC" <${process.env.MAIL_USER}>`,
-      to: email,
-      subject: "✅ Xác nhận đặt xe thành công",
-      html: `
-        <h3>Xin chào ${fullname}</h3>
-        <p>Đơn đặt xe của bạn đã được ghi nhận:</p>
-        <ul>
-          <li>📍 Đón: ${pickup_location}</li>
-          <li>📍 Trả: ${dropoff_location}</li>
-          <li>🗓 Ngày: ${pickup_date}</li>
-          <li>⏰ Giờ: ${pickup_time}</li>
-          <li>🚘 Xe: ${car_type || "Không chọn"}</li>
-        </ul>
-        <p>Nhà xe sẽ liên hệ sớm ❤️</p>
-      `,
-    });
+    // await transporter.sendMail({
+    //   from: `"Nhà xe ABC" <${process.env.MAIL_USER}>`,
+    //   to: email,
+    //   subject: "✅ Xác nhận đặt xe thành công",
+    //   html: `
+    //     <h3>Xin chào ${fullname}</h3>
+    //     <p>Đơn đặt xe của bạn đã được ghi nhận:</p>
+    //     <ul>
+    //       <li>📍 Đón: ${pickup_location}</li>
+    //       <li>📍 Trả: ${dropoff_location}</li>
+    //       <li>🗓 Ngày: ${pickup_date}</li>
+    //       <li>⏰ Giờ: ${pickup_time}</li>
+    //       <li>🚘 Xe: ${car_type || "Không chọn"}</li>
+    //     </ul>
+    //     <p>Nhà xe sẽ liên hệ sớm ❤️</p>
+    //   `,
+    // });
 
     res.json({ success: true });
   } catch (err) {
