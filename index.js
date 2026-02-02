@@ -23,6 +23,21 @@ console.log("MAIL PASS:", process.env.MAIL_PASS);
 /* ======================
    API BOOKING
 ====================== */
+app.get("/test-mail", async (req, res) => {
+  try {
+    await transporter.sendMail({
+      from: `"Test Mail" <${process.env.MAIL_USER}>`,
+      to: process.env.MAIL_USER,
+      subject: "TEST MAIL OK",
+      text: "Nếu thấy mail này là Gmail OK",
+    });
+    res.send("MAIL OK");
+  } catch (e) {
+    console.error(e);
+    res.status(500).send("MAIL FAIL");
+  }
+});
+
 app.post("/booking", async (req, res) => {
   try {
     const {
